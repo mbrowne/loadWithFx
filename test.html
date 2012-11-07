@@ -1,0 +1,64 @@
+<script>
+curl = {apiName: 'require'}
+</script>
+<script src="lib/curl.min.js"></script>
+<script>
+
+//TODO - provide hooks for "read more" capability
+//And a flag for whether it should be added to the browser navigation history
+
+// <?= jsbind('#myLink', '#outputDiv'); ?>
+//
+// OR:
+// <button class="loadWithFx" data-dest="#outputDiv" data-url="http://localhost/service/someWebService" data-push-state></button>
+//
+// <div id="outputDiv" data-fx-out="fadeOut" ... ></div>
+
+require(
+    {
+        //baseUrl: "myApp",
+        paths: {
+            "jquery": "//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min"
+            //,"jqueryui": "//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"
+        }
+    },
+    ["jquery", "loadWithFx"],
+    function ($, loadWithFx) {
+    	var url = 'http://localhost';
+    
+    	var log = console.log;
+    
+    	//loadWithFx.DEBUG = true;
+    	//log('DEBUG = '+loadWithFx.getDebug());
+    	
+    	$('#btn1').one('click', function() {
+    		$('#ajaxContent').loadWithFx(url, null, null, ['slideUp', 'slow'], ['slideDown', 'slow']);
+		});
+    }
+);
+
+</script>
+
+
+<!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="loadWithFx.js" async></script>
+-->
+
+<!--, null, null, ['fadeOut', 'slow'], ['fadeIn', 'slow']
+ this.onclick='';
+-->
+
+<a id="myLnk2" href="javascript:;" onclick="jQuery('#ajaxContent').loadWithFx('http://localhost/test2.php');">Load AJAX (no caching)</a>
+|
+<a id="myLnk" href="javascript:;" onclick="jQuery('#ajaxContent').loadWithFx( {url:'http://localhost', cacheResponse:true} );">Load AJAX (with caching)</a>
+
+
+<button id="btn1">Click me</button>
+
+<div id="ajaxContent">Ajax content will go here</div>
+
+<!--
+<button onclick="jQuery('#test').fadeIn('slow');">test</button>
+
+<div id="test" style="display:none">abcd</div>-->
